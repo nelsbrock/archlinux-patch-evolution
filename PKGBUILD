@@ -1,4 +1,3 @@
-# $Id: PKGBUILD,v 1.66 2008/03/13 00:03:32 jgc Exp $
 # Maintainer: dale <dale@archlinux.org>
 
 pkgname=evolution
