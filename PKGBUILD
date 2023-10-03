@@ -1,3 +1,4 @@
+# Maintainer: Fabian Bornschein <fabiscafe-at-mailbox-dot-org>
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 # Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
 # Contributor: Jan de Groot <jgc@archlinux.org>
@@ -8,7 +9,7 @@ pkgname=(
   evolution-bogofilter
   evolution-spamassassin
 )
-pkgver=3.48.4
+pkgver=3.50.0
 pkgrel=1
 pkgdesc="Manage your email, contacts and schedule"
 url="https://wiki.gnome.org/Apps/Evolution"
@@ -43,7 +44,7 @@ makedepends=(
   yelp-tools
 )
 options=(!emptydirs)
-_commit=7090262158e872f02ceae8c857fc43d5678f0031  # tags/3.48.4^0
+_commit=41c0c1e30e0244c111aa251ac2e71ce1db122d4a  # tags/3.50.0^0
 source=("git+https://gitlab.gnome.org/GNOME/evolution.git#commit=$_commit")
 b2sums=('SKIP')
 

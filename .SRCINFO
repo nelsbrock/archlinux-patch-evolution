@@ -1,0 +1,68 @@
+pkgbase = evolution
+	pkgdesc = Manage your email, contacts and schedule
+	pkgver = 3.50.0
+	pkgrel = 1
+	url = https://wiki.gnome.org/Apps/Evolution
+	arch = x86_64
+	license = GPL
+	makedepends = bogofilter
+	makedepends = cmake
+	makedepends = docbook-xsl
+	makedepends = git
+	makedepends = gtk-doc
+	makedepends = highlight
+	makedepends = intltool
+	makedepends = itstool
+	makedepends = networkmanager
+	makedepends = ninja
+	makedepends = spamassassin
+	makedepends = yelp-tools
+	depends = cmark
+	depends = enchant
+	depends = evolution-data-server
+	depends = gnome-autoar
+	depends = gnome-desktop
+	depends = gspell
+	depends = libcanberra
+	depends = libgweather-4
+	depends = libnotify
+	depends = libpst
+	depends = libytnef
+	depends = webkit2gtk-4.1
+	options = !emptydirs
+	source = git+https://gitlab.gnome.org/GNOME/evolution.git#commit=41c0c1e30e0244c111aa251ac2e71ce1db122d4a
+	b2sums = SKIP
+
+pkgname = evolution
+	groups = gnome-extra
+	depends = cmark
+	depends = enchant
+	depends = evolution-data-server
+	depends = gnome-autoar
+	depends = gnome-desktop
+	depends = gspell
+	depends = libcanberra
+	depends = libgweather-4
+	depends = libnotify
+	depends = libpst
+	depends = libytnef
+	depends = webkit2gtk-4.1
+	depends = libcamel-1.2.so
+	depends = libebook-1.2.so
+	depends = libebook-contacts-1.2.so
+	depends = libecal-2.0.so
+	depends = libedataserver-1.2.so
+	depends = libedataserverui-1.2.so
+	optdepends = evolution-bogofilter: Bogofilter spam check plugin
+	optdepends = evolution-spamassassin: Spamassassin spam check plugin
+	optdepends = highlight: text highlight plugin
+
+pkgname = evolution-bogofilter
+	pkgdesc = Spam filtering for Evolution, using Bogofilter
+	depends = evolution=3.50.0
+	depends = bogofilter
+
+pkgname = evolution-spamassassin
+	pkgdesc = Spam filtering for Evolution, using SpamAssassin
+	depends = evolution=3.50.0
+	depends = spamassassin
