@@ -1,6 +1,6 @@
 pkgbase = evolution
 	pkgdesc = Manage your email, contacts and schedule
-	pkgver = 3.50.0
+	pkgver = 3.50.1
 	pkgrel = 1
 	url = https://wiki.gnome.org/Apps/Evolution
 	arch = x86_64
@@ -30,7 +30,7 @@ pkgbase = evolution
 	depends = libytnef
 	depends = webkit2gtk-4.1
 	options = !emptydirs
-	source = git+https://gitlab.gnome.org/GNOME/evolution.git#commit=41c0c1e30e0244c111aa251ac2e71ce1db122d4a
+	source = git+https://gitlab.gnome.org/GNOME/evolution.git#commit=8c033067f52e611b7b50fedbbcb1e7950835d269
 	b2sums = SKIP
 
 pkgname = evolution
@@ -59,10 +59,10 @@ pkgname = evolution
 
 pkgname = evolution-bogofilter
 	pkgdesc = Spam filtering for Evolution, using Bogofilter
-	depends = evolution=3.50.0
+	depends = evolution=3.50.1
 	depends = bogofilter
 
 pkgname = evolution-spamassassin
 	pkgdesc = Spam filtering for Evolution, using SpamAssassin
-	depends = evolution=3.50.0
+	depends = evolution=3.50.1
 	depends = spamassassin
