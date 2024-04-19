@@ -1,6 +1,6 @@
 pkgbase = evolution
 	pkgdesc = Manage your email, contacts and schedule
-	pkgver = 3.52.0
+	pkgver = 3.52.1
 	pkgrel = 1
 	url = https://wiki.gnome.org/Apps/Evolution
 	arch = x86_64
@@ -17,37 +17,73 @@ pkgbase = evolution
 	makedepends = ninja
 	makedepends = spamassassin
 	makedepends = yelp-tools
+	depends = at-spi2-core
+	depends = cairo
 	depends = cmark
+	depends = dconf
 	depends = enchant
 	depends = evolution-data-server
+	depends = gdk-pixbuf2
+	depends = geocode-glib-2
+	depends = glib2
+	depends = glibc
 	depends = gnome-autoar
 	depends = gnome-desktop
 	depends = gspell
+	depends = gtk3
+	depends = hicolor-icon-theme
 	depends = libcanberra
 	depends = libgweather-4
+	depends = libical
+	depends = libldap
 	depends = libnotify
 	depends = libpst
+	depends = libsecret
+	depends = libsoup3
+	depends = libxml2
 	depends = libytnef
+	depends = nspr
+	depends = nss
+	depends = pango
+	depends = sqlite
 	depends = webkit2gtk-4.1
 	options = !emptydirs
-	source = git+https://gitlab.gnome.org/GNOME/evolution.git#commit=b86d791a22a4abc0183ca4258a46977d6f6cf548
-	b2sums = SKIP
+	source = git+https://gitlab.gnome.org/GNOME/evolution.git#tag=3.52.1
+	b2sums = 6a3abaad1d08b7031716fa68c2c43d179a6ae268fc07c9a342532df1e51d7a2e92a8b082ee230f04b983a780453b603c5a203da53165a0cc55214f0e1722230d
 
 pkgname = evolution
 	groups = gnome-extra
 	license = LGPL-2.1-or-later
 	license = LicenseRef-OpenLDAP-Public-License
+	depends = at-spi2-core
+	depends = cairo
 	depends = cmark
+	depends = dconf
 	depends = enchant
 	depends = evolution-data-server
+	depends = gdk-pixbuf2
+	depends = geocode-glib-2
+	depends = glib2
+	depends = glibc
 	depends = gnome-autoar
 	depends = gnome-desktop
 	depends = gspell
+	depends = gtk3
+	depends = hicolor-icon-theme
 	depends = libcanberra
 	depends = libgweather-4
+	depends = libical
+	depends = libldap
 	depends = libnotify
 	depends = libpst
+	depends = libsecret
+	depends = libsoup3
+	depends = libxml2
 	depends = libytnef
+	depends = nspr
+	depends = nss
+	depends = pango
+	depends = sqlite
 	depends = webkit2gtk-4.1
 	depends = libcamel-1.2.so
 	depends = libebook-1.2.so
@@ -61,10 +97,18 @@ pkgname = evolution
 
 pkgname = evolution-bogofilter
 	pkgdesc = Spam filtering for Evolution, using Bogofilter
-	depends = evolution=3.52.0
+	depends = evolution=3.52.1
 	depends = bogofilter
+	depends = evolution-data-server
+	depends = glib2
+	depends = glibc
+	depends = gtk3
 
 pkgname = evolution-spamassassin
 	pkgdesc = Spam filtering for Evolution, using SpamAssassin
-	depends = evolution=3.52.0
+	depends = evolution=3.52.1
+	depends = evolution-data-server
+	depends = glib2
+	depends = glibc
+	depends = gtk3
 	depends = spamassassin
