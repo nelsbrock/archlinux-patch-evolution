@@ -5,8 +5,6 @@
 pkgbase=evolution
 pkgname=(
   evolution
-  evolution-bogofilter
-  evolution-spamassassin
 )
 pkgver=3.54.0
 pkgrel=1
@@ -47,7 +45,6 @@ depends=(
   webkit2gtk-4.1
 )
 makedepends=(
-  bogofilter
   cmake
   docbook-xsl
   git
@@ -58,15 +55,18 @@ makedepends=(
   itstool
   networkmanager
   ninja
+  patch
   spamassassin
   yelp-tools
 )
 options=(!emptydirs)
-source=("git+https://gitlab.gnome.org/GNOME/evolution.git#tag=$pkgver")
-b2sums=('bfd879f7a9baa3f7cd61edfaca9ca80833389a41b95cdc09ff5f61e22c812666b4787c5d6e9eb39d9aee09026fb64a5d84cfb4382d3121d3bee60da25c1e1351')
+source=("git+https://gitlab.gnome.org/GNOME/evolution.git#tag=$pkgver" remove-user-agent.patch)
+b2sums=('bfd879f7a9baa3f7cd61edfaca9ca80833389a41b95cdc09ff5f61e22c812666b4787c5d6e9eb39d9aee09026fb64a5d84cfb4382d3121d3bee60da25c1e1351'
+        '88aefdb879a3d91f38b454990c928166f983d4cb290d5d89e2eaf188382fa90eb873167faf46247dd9f52861f7f9755edf2418b587e17fbf2a9e53a90bbd1a0d')
 
 prepare() {
   cd $pkgbase
+  patch --forward --strip=1 --input=../remove-user-agent.patch
 }
 
 build() {
@@ -83,16 +83,6 @@ build() {
   cmake --build build
 }
 
-_pick() {
-  local p="$1" f d; shift
-  for f; do
-    d="$srcdir/$p/${f#$pkgdir/}"
-    mkdir -p "$(dirname "$d")"
-    mv "$f" "$d"
-    rmdir -p --ignore-fail-on-non-empty "$(dirname "$f")"
-  done
-}
-
 package_evolution() {
   depends+=(
     libcamel-1.2.so
@@ -107,48 +97,15 @@ package_evolution() {
     'evolution-spamassassin: Spamassassin spam check plugin'
     'highlight: text highlight plugin'
   )
-  groups=(gnome-extra)
+  groups=(gnome-extra modified)
   license+=(LicenseRef-OpenLDAP-Public-License)
 
   DESTDIR="$pkgdir" cmake --install build
 
   cd "$pkgdir"
-  for x in bogofilter spamassassin; do
-    _pick $x usr/lib/evolution/modules/module-$x.so
-    _pick $x usr/share/metainfo/org.gnome.Evolution-$x.metainfo.xml
-  done
 
   install -D -m644 "${srcdir}/evolution/COPYING.OPENLDAP" \
     "${pkgdir}/usr/share/licenses/evolution/COPYING.OPENLDAP"
-}
-
-
-package_evolution-bogofilter() {
-  pkgdesc="Spam filtering for Evolution, using Bogofilter"
-  depends=(
-    "evolution=$pkgver"
-    bogofilter
-    evolution-data-server
-    glib2
-    glibc
-    gtk3
-  )
-
-  mv bogofilter/* "$pkgdir"
-}
-
-package_evolution-spamassassin() {
-  pkgdesc="Spam filtering for Evolution, using SpamAssassin"
-  depends=(
-    "evolution=$pkgver"
-    evolution-data-server
-    glib2
-    glibc
-    gtk3
-    spamassassin
-  )
-
-  mv spamassassin/* "$pkgdir"
 }
 
 # vim:set sw=2 sts=-1 et:
