@@ -1,0 +1,71 @@
+diff --git a/src/libemail-engine/e-mail-folder-utils.c b/src/libemail-engine/e-mail-folder-utils.c
+index c691707900..b7ffc56ee1 100644
+--- a/src/libemail-engine/e-mail-folder-utils.c
++++ b/src/libemail-engine/e-mail-folder-utils.c
+@@ -28,9 +28,6 @@
+ 
+ #include "e-mail-utils.h"
+ 
+-/* User-Agent header value */
+-#define USER_AGENT ("Evolution " VERSION VERSION_SUBSTRING " " VERSION_COMMENT)
+-
+ typedef struct _AsyncContext AsyncContext;
+ 
+ struct _AsyncContext {
+@@ -108,9 +105,6 @@ e_mail_folder_append_message_sync (CamelFolder *folder,
+ 	g_free (full_display_name);
+ 
+ 	if (!camel_medium_get_header (medium, "X-Evolution-Is-Redirect")) {
+-		if (camel_medium_get_header (medium, "User-Agent") == NULL)
+-			camel_medium_set_header (medium, "User-Agent", USER_AGENT);
+-
+ 		camel_mime_message_set_date (message, CAMEL_MESSAGE_DATE_CURRENT, 0);
+ 	}
+ 
+diff --git a/src/libemail-engine/e-mail-session-utils.c b/src/libemail-engine/e-mail-session-utils.c
+index 776c90caac..ebf84caeaa 100644
+--- a/src/libemail-engine/e-mail-session-utils.c
++++ b/src/libemail-engine/e-mail-session-utils.c
+@@ -26,9 +26,6 @@
+ #include <libemail-engine/e-mail-utils.h>
+ #include <libemail-engine/mail-tools.h>
+ 
+-/* User-Agent header value */
+-#define USER_AGENT ("Evolution " VERSION VERSION_SUBSTRING " " VERSION_COMMENT)
+-
+ /* FIXME: Temporary - remove this after we move filter/ to eds */
+ #define E_FILTER_SOURCE_OUTGOING "outgoing"
+ 
+@@ -828,9 +825,6 @@ e_mail_session_send_to (EMailSession *session,
+ 
+ 	medium = CAMEL_MEDIUM (message);
+ 
+-	if (!camel_medium_get_header (medium, "X-Evolution-Is-Redirect"))
+-		camel_medium_set_header (medium, "User-Agent", USER_AGENT);
+-
+ 	request_dsn = g_strcmp0 (camel_medium_get_header (medium, "X-Evolution-Request-DSN"), "1") == 0;
+ 
+ 	/* Do this before removing "X-Evolution" headers. */
+diff --git a/src/libemail-engine/mail-ops.c b/src/libemail-engine/mail-ops.c
+index c0e8014a84..5a8a38e91a 100644
+--- a/src/libemail-engine/mail-ops.c
++++ b/src/libemail-engine/mail-ops.c
+@@ -46,8 +46,6 @@
+ #define w(x)
+ #define d(x)
+ 
+-#define USER_AGENT ("Evolution " VERSION VERSION_SUBSTRING " " VERSION_COMMENT)
+-
+ /* used for both just filtering a folder + uid's, and for filtering a whole folder */
+ /* used both for fetching mail, and for filtering mail */
+ struct _filter_mail_msg {
+@@ -598,9 +596,6 @@ mail_send_message (struct _send_queue_msg *m,
+ 	if (!message)
+ 		return;
+ 
+-	if (!camel_medium_get_header (CAMEL_MEDIUM (message), "X-Evolution-Is-Redirect"))
+-		camel_medium_set_header (CAMEL_MEDIUM (message), "User-Agent", USER_AGENT);
+-
+ 	request_dsn = g_strcmp0 (camel_medium_get_header (CAMEL_MEDIUM (message), "X-Evolution-Request-DSN"), "1") == 0;
+ 
+ 	/* Do this before removing "X-Evolution" headers. */

@@ -5,8 +5,6 @@
 pkgbase=evolution
 pkgname=(
   evolution
-  evolution-bogofilter
-  evolution-spamassassin
 )
 pkgver=3.52.2
 pkgrel=2
@@ -47,7 +45,6 @@ depends=(
   webkit2gtk-4.1
 )
 makedepends=(
-  bogofilter
   cmake
   docbook-xsl
   git
@@ -58,12 +55,14 @@ makedepends=(
   itstool
   networkmanager
   ninja
+  patch
   spamassassin
   yelp-tools
 )
 options=(!emptydirs)
-source=("git+https://gitlab.gnome.org/GNOME/evolution.git#tag=$pkgver")
-b2sums=('5094abb2d684c559ec50c9d3b1d6f865b5349b8a6360c281fa1a005841e3da72532193cef647f25eba558a1d755d96f409e80470ad070b60252ffed6ae196fc4')
+source=("git+https://gitlab.gnome.org/GNOME/evolution.git#tag=$pkgver" remove-user-agent.patch)
+b2sums=('5094abb2d684c559ec50c9d3b1d6f865b5349b8a6360c281fa1a005841e3da72532193cef647f25eba558a1d755d96f409e80470ad070b60252ffed6ae196fc4'
+        '88aefdb879a3d91f38b454990c928166f983d4cb290d5d89e2eaf188382fa90eb873167faf46247dd9f52861f7f9755edf2418b587e17fbf2a9e53a90bbd1a0d')
 
 prepare() {
   cd $pkgbase
@@ -72,6 +71,8 @@ prepare() {
   # https://gitlab.archlinux.org/archlinux/packaging/packages/evolution/-/issues/3
   # https://gitlab.gnome.org/GNOME/evolution/-/issues/2761
   git cherry-pick -n a735ee79e68e0a09fa7dd9a116bde16a4b48b4ad
+
+  patch --forward --strip=1 --input=../remove-user-agent.patch
 }
 
 build() {
@@ -88,16 +89,6 @@ build() {
   cmake --build build
 }
 
-_pick() {
-  local p="$1" f d; shift
-  for f; do
-    d="$srcdir/$p/${f#$pkgdir/}"
-    mkdir -p "$(dirname "$d")"
-    mv "$f" "$d"
-    rmdir -p --ignore-fail-on-non-empty "$(dirname "$f")"
-  done
-}
-
 package_evolution() {
   depends+=(
     libcamel-1.2.so
@@ -112,48 +103,15 @@ package_evolution() {
     'evolution-spamassassin: Spamassassin spam check plugin'
     'highlight: text highlight plugin'
   )
-  groups=(gnome-extra)
+  groups=(gnome-extra modified)
   license+=(LicenseRef-OpenLDAP-Public-License)
 
   DESTDIR="$pkgdir" cmake --install build
 
   cd "$pkgdir"
-  for x in bogofilter spamassassin; do
-    _pick $x usr/lib/evolution/modules/module-$x.so
-    _pick $x usr/share/metainfo/org.gnome.Evolution-$x.metainfo.xml
-  done
 
   install -D -m644 "${srcdir}/evolution/COPYING.OPENLDAP" \
     "${pkgdir}/usr/share/licenses/evolution/COPYING.OPENLDAP"
-}
-
-
-package_evolution-bogofilter() {
-  pkgdesc="Spam filtering for Evolution, using Bogofilter"
-  depends=(
-    "evolution=$pkgver"
-    bogofilter
-    evolution-data-server
-    glib2
-    glibc
-    gtk3
-  )
-
-  mv bogofilter/* "$pkgdir"
-}
-
-package_evolution-spamassassin() {
-  pkgdesc="Spam filtering for Evolution, using SpamAssassin"
-  depends=(
-    "evolution=$pkgver"
-    evolution-data-server
-    glib2
-    glibc
-    gtk3
-    spamassassin
-  )
-
-  mv spamassassin/* "$pkgdir"
 }
 
 # vim:set sw=2 sts=-1 et:
