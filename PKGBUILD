@@ -9,7 +9,7 @@ pkgname=(
   evolution-spamassassin
 )
 pkgver=3.52.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Manage your email, contacts and schedule"
 url="https://gitlab.gnome.org/GNOME/evolution/-/wikis/home"
 arch=(x86_64)
@@ -51,6 +51,7 @@ makedepends=(
   cmake
   docbook-xsl
   git
+  glib2-devel
   gtk-doc
   highlight
   intltool
@@ -66,6 +67,11 @@ b2sums=('5094abb2d684c559ec50c9d3b1d6f865b5349b8a6360c281fa1a005841e3da72532193c
 
 prepare() {
   cd $pkgbase
+
+  # Fix crash when spellchecking without errors
+  # https://gitlab.archlinux.org/archlinux/packaging/packages/evolution/-/issues/3
+  # https://gitlab.gnome.org/GNOME/evolution/-/issues/2761
+  git cherry-pick -n a735ee79e68e0a09fa7dd9a116bde16a4b48b4ad
 }
 
 build() {

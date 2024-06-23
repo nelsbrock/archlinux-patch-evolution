@@ -1,7 +1,7 @@
 pkgbase = evolution
 	pkgdesc = Manage your email, contacts and schedule
 	pkgver = 3.52.2
-	pkgrel = 1
+	pkgrel = 2
 	url = https://gitlab.gnome.org/GNOME/evolution/-/wikis/home
 	arch = x86_64
 	license = LGPL-2.1-or-later
@@ -9,6 +9,7 @@ pkgbase = evolution
 	makedepends = cmake
 	makedepends = docbook-xsl
 	makedepends = git
+	makedepends = glib2-devel
 	makedepends = gtk-doc
 	makedepends = highlight
 	makedepends = intltool
