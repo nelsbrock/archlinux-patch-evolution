@@ -1,7 +1,7 @@
 pkgbase = evolution
 	pkgdesc = Manage your email, contacts and schedule
-	pkgver = 3.52.2
-	pkgrel = 2
+	pkgver = 3.52.3
+	pkgrel = 1
 	url = https://gitlab.gnome.org/GNOME/evolution/-/wikis/home
 	arch = x86_64
 	license = LGPL-2.1-or-later
@@ -49,8 +49,8 @@ pkgbase = evolution
 	depends = sqlite
 	depends = webkit2gtk-4.1
 	options = !emptydirs
-	source = git+https://gitlab.gnome.org/GNOME/evolution.git#tag=3.52.2
-	b2sums = 5094abb2d684c559ec50c9d3b1d6f865b5349b8a6360c281fa1a005841e3da72532193cef647f25eba558a1d755d96f409e80470ad070b60252ffed6ae196fc4
+	source = git+https://gitlab.gnome.org/GNOME/evolution.git#tag=3.52.3
+	b2sums = 7b9c74d0f14049f6c9362ea2e65a4979fea90c608a31b68fc2e49185fbc45c7c533a9deb359d52888b48071d18a347c85372025ace18fa6950040fb7fe0dcf45
 
 pkgname = evolution
 	groups = gnome-extra
@@ -98,7 +98,7 @@ pkgname = evolution
 
 pkgname = evolution-bogofilter
 	pkgdesc = Spam filtering for Evolution, using Bogofilter
-	depends = evolution=3.52.2
+	depends = evolution=3.52.3
 	depends = bogofilter
 	depends = evolution-data-server
 	depends = glib2
@@ -107,7 +107,7 @@ pkgname = evolution-bogofilter
 
 pkgname = evolution-spamassassin
 	pkgdesc = Spam filtering for Evolution, using SpamAssassin
-	depends = evolution=3.52.2
+	depends = evolution=3.52.3
 	depends = evolution-data-server
 	depends = glib2
 	depends = glibc

@@ -8,8 +8,8 @@ pkgname=(
   evolution-bogofilter
   evolution-spamassassin
 )
-pkgver=3.52.2
-pkgrel=2
+pkgver=3.52.3
+pkgrel=1
 pkgdesc="Manage your email, contacts and schedule"
 url="https://gitlab.gnome.org/GNOME/evolution/-/wikis/home"
 arch=(x86_64)
@@ -63,15 +63,10 @@ makedepends=(
 )
 options=(!emptydirs)
 source=("git+https://gitlab.gnome.org/GNOME/evolution.git#tag=$pkgver")
-b2sums=('5094abb2d684c559ec50c9d3b1d6f865b5349b8a6360c281fa1a005841e3da72532193cef647f25eba558a1d755d96f409e80470ad070b60252ffed6ae196fc4')
+b2sums=('7b9c74d0f14049f6c9362ea2e65a4979fea90c608a31b68fc2e49185fbc45c7c533a9deb359d52888b48071d18a347c85372025ace18fa6950040fb7fe0dcf45')
 
 prepare() {
   cd $pkgbase
-
-  # Fix crash when spellchecking without errors
-  # https://gitlab.archlinux.org/archlinux/packaging/packages/evolution/-/issues/3
-  # https://gitlab.gnome.org/GNOME/evolution/-/issues/2761
-  git cherry-pick -n a735ee79e68e0a09fa7dd9a116bde16a4b48b4ad
 }
 
 build() {
