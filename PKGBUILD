@@ -9,7 +9,7 @@ pkgname=(
   evolution-spamassassin
 )
 pkgver=3.52.4
-pkgrel=1
+pkgrel=2
 pkgdesc="Manage your email, contacts and schedule"
 url="https://gitlab.gnome.org/GNOME/evolution/-/wikis/home"
 arch=(x86_64)
